@@ -115,7 +115,6 @@ header {
 .tasks > li {
   display: flex;
   padding: 16px;
-  border-bottom: #eee solid 1px;
 }
 
 .tasks > li > span {
@@ -131,6 +130,26 @@ header {
   justify-content: center;
 }
 
+.upsidedown {
+  font-size: large;
+  -moz-transform: scale(1, -1);
+  -webkit-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+/* style specific button and flip the component updside down for down arrow*/
+.specialButton {
+  font-weight: normal !important;
+  font-size: normal !important;
+  border: none !important;
+  color: black !important;
+  box-shadow: 0 0px 0px rgba(34, 25, 25, 0.4) !important;
+  padding: 5px;
+  padding-right: 1em;
+  cursor: pointer;
+  background-color: white !important;
+}
 .filter > button {
   background-color: #62807e;
 }
@@ -191,4 +210,14 @@ header {
 
 .github-btn > div {
   margin-left: 4px;
+}
+.loading {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  justify-content: center;
+  align-items: center;
+
+  font-weight: bold;
 }

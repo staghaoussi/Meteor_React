@@ -9,7 +9,7 @@ export const TaskForm = () => {
 
     if (!text) return;
 
-    Meteor.call('tasks.insert', text);
+    Meteor.call('tasks.insert', text,"");
 
     setText('');
   };

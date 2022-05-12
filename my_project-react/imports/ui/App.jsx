@@ -9,9 +9,12 @@ import { LoginForm } from './LoginForm';
 const toggleChecked = ({ _id, isChecked }) =>
   Meteor.call('tasks.setIsChecked', _id, !isChecked);
 
-  const deleteTask = ({ _id }) => Meteor.call('tasks.remove', _id);
+const deleteTask = ({ _id }) => Meteor.call('tasks.remove', _id);
+const logout = () => Meteor.logout();
 
 export const App = () => {
+
+  // constants from tutorial
   const user = useTracker(() => Meteor.user());
 
   const [hideCompleted, setHideCompleted] = useState(false);
@@ -22,33 +25,35 @@ export const App = () => {
 
   const pendingOnlyFilter = { ...hideCompletedFilter, ...userFilter };
 
-  const tasks = useTracker(() => {
-    if (!user) {
-      return [];
+  const { tasks, pendingTasksCount, isLoading } = useTracker(() => {
+    const noDataAvailable = { tasks: [], pendingTasksCount: 0 };
+    if (!Meteor.user()) {
+      return noDataAvailable;
+    }
+    const handler = Meteor.subscribe('tasks');
+
+    if (!handler.ready()) {
+      return { ...noDataAvailable, isLoading: true };
     }
 
-    return TasksCollection.find(
+    const tasks = TasksCollection.find(
       hideCompleted ? pendingOnlyFilter : userFilter,
       {
         sort: { createdAt: -1 },
       }
     ).fetch();
-  });
+    const pendingTasksCount = TasksCollection.find(pendingOnlyFilter).count();
 
-  const pendingTasksCount = useTracker(() => {
-    if (!user) {
-      return 0;
-    }
-
-    return TasksCollection.find(pendingOnlyFilter).count();
+    return { tasks, pendingTasksCount };
   });
 
   const pendingTasksTitle = `${
     pendingTasksCount ? ` (${pendingTasksCount})` : ''
   }`;
 
-  const logout = () => Meteor.logout();
+  
 
+  // return to render the following react
   return (
     <div className="app">
       <header>
@@ -76,6 +81,8 @@ export const App = () => {
                 {hideCompleted ? 'Show All' : 'Hide Completed'}
               </button>
             </div>
+
+            {isLoading && <div className="loading">loading...</div>}
 
             <ul className="tasks">
               {tasks.map(task => (
