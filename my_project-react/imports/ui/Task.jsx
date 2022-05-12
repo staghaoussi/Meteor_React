@@ -9,19 +9,17 @@ export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
   // show description
   const [showd, setshowd] = useState(false);
 
-
+  // function updates database when user unfocuses from text description box
   const handleUnFocus = e => {
     e.preventDefault();
-    console.log(!TaskD, "in unfocus")
     if (!TaskD) return;
 
-    Meteor.call('tasks.update',TaskD);
+    Meteor.call('tasks.update',TaskD, task._id);
 
   };
 
-  console.log(TaskD)
   return (
-    <Fragment>
+    <div className='task_container'>
       <li>
         <input
           type="checkbox"
@@ -34,21 +32,23 @@ export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
       </li>
 
       {/* This div is the "container" for the check box and text description" */}
-      
+      <div className='feature'>
       <button className={showd ? "upsidedown specialButton":"specialButton"} onClick={()=>{setshowd(!showd)}}>{showd ? "^":">"}</button>
-      {showd ?
-      <input
-        type="text"
-        placeholder="Type to add new tasks"
-        value={TaskD}
-        onChange={(e) => setTaskD(e.target.value)}
-        onBlur={(e) => handleUnFocus(e)}
-      />
-      : <Fragment/>
-      }
-        
-      
-    </Fragment>
-    
+        {showd ?
+        <input
+          type="text"
+          placeholder="Type to add description"
+          value={TaskD}
+          onChange={(e) => setTaskD(e.target.value)}
+          onBlur={(e) => handleUnFocus(e)}
+        />
+        : <Fragment/>
+        }
+      </div>
+
+
+
+    </div>
+
   );
 };

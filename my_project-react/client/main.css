@@ -16,13 +16,17 @@ body {
   font-size: 14px;
 }
 
+.feature {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+}
 button {
   font-weight: bold;
   font-size: 1em;
   border: none;
   color: white;
   box-shadow: 0 3px 3px rgba(34, 25, 25, 0.4);
-  padding: 5px;
   cursor: pointer;
 }
 
@@ -114,16 +118,24 @@ header {
 
 .tasks > li {
   display: flex;
-  padding: 16px;
+}
+.tasks >div >li {
+  display: flex;
 }
 
 .tasks > li > span {
   flex-grow: 1;
 }
 
-.tasks > li > button {
+.task_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tasks > div > li > button {
   justify-self: flex-end;
   background-color: #ff3046;
+  margin-left: auto;
 }
 .filter {
   display: flex;
@@ -142,10 +154,10 @@ header {
 .specialButton {
   font-weight: normal !important;
   font-size: normal !important;
+  margin-right: auto;
   border: none !important;
   color: black !important;
   box-shadow: 0 0px 0px rgba(34, 25, 25, 0.4) !important;
-  padding: 5px;
   padding-right: 1em;
   cursor: pointer;
   background-color: white !important;

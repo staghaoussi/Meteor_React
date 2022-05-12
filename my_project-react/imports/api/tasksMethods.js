@@ -1,15 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { TasksCollection } from '../db/TasksCollection.js';
- 
+
 Meteor.methods({
-  'tasks.update'(taskD){
+  'tasks.update'(taskD, id){
     check(taskD, String);
     if(!this.userId){
       throw new Meteor.Error('Not authorized.');
     }
-    TasksCollection.update(this.userId, {Task_d: taskD})
-    
+    TasksCollection.update(id, {$set: {Task_d: taskD}})
+
   },
 
   'tasks.insert'(text,task_description) {
