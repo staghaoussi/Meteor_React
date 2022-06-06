@@ -1,16 +1,20 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
 import { Accounts } from 'meteor/accounts-base';
 import { TasksCollection } from '/imports/db/TasksCollection.js';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 import '/imports/api/tasksMethods';
 import '/imports/api/taskPublications';
 
-const insertTask = (taskText, user) =>
-  TasksCollection.insert({
-    text: taskText,
-    userId: user._id,
-    createdAt: new Date(),
-  });
+
+
+// const insertTask = (taskText, user) =>
+//   TasksCollection.insert({
+//     text: taskText,
+//     userId: user._id,
+//     createdAt: new Date(),
+//   });
 
 const SEED_USERNAME = 'meteorite';
 const SEED_PASSWORD = 'password';
@@ -22,6 +26,17 @@ Meteor.startup(() => {
       password: SEED_PASSWORD,
     });
   }
+
+
+
+
+
+
+
+
+
+
+
 
   const user = Accounts.findUserByUsername(SEED_USERNAME);
 

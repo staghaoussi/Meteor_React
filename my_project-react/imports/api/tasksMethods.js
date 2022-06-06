@@ -1,6 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { TasksCollection } from '../db/TasksCollection.js';
+Meteor.methods({
+
+})
 
 Meteor.methods({
   'tasks.update'(taskD, id){
@@ -10,6 +13,11 @@ Meteor.methods({
     }
     TasksCollection.update(id, {$set: {Task_d: taskD}})
 
+  },
+  'world-from-server'(val){
+    check(val,Number);
+    console.log("world")
+    return val
   },
 
   'tasks.insert'(text,task_description) {

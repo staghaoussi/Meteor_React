@@ -11,6 +11,7 @@ const toggleChecked = ({ _id, isChecked }) =>
 
 const deleteTask = ({ _id }) => Meteor.call('tasks.remove', _id);
 const logout = () => Meteor.logout();
+const hello_clicked = (a) => Meteor.call('world-from-server',a,(err, res)=>{err ? console.log(err) : console.log(res)});
 
 export const App = () => {
 
@@ -51,7 +52,7 @@ export const App = () => {
     pendingTasksCount ? ` (${pendingTasksCount})` : ''
   }`;
 
-  
+
 
   // return to render the following react
   return (
@@ -63,6 +64,7 @@ export const App = () => {
               📝️ To Do List
               {pendingTasksTitle}
             </h1>
+            <button onClick={() => hello_clicked(3)} className='hello'>"Say Hello ----------------from client"</button>
           </div>
         </div>
       </header>
