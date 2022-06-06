@@ -5,6 +5,8 @@ import { TasksCollection } from '/imports/db/TasksCollection';
 import { Task } from './Task';
 import { TaskForm } from './TaskForm';
 import { LoginForm } from './LoginForm';
+import { D3 } from './D3';
+import '../../node_modules/uikit/dist/css/uikit.css'
 
 const toggleChecked = ({ _id, isChecked }) =>
   Meteor.call('tasks.setIsChecked', _id, !isChecked);
@@ -69,7 +71,7 @@ export const App = () => {
         </div>
       </header>
 
-      <div className="main">
+      <div className="main uk-flex uk-flex-column uk-flex-middle uk-height-1-1">
         {user ? (
           <Fragment>
             <div className="user" onClick={logout}>
@@ -98,7 +100,10 @@ export const App = () => {
             </ul>
           </Fragment>
         ) : (
-          <LoginForm />
+          <Fragment>
+            <LoginForm />
+            <D3/>
+          </Fragment>
         )}
       </div>
     </div>
