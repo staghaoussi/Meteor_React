@@ -27,30 +27,7 @@ Meteor.startup(() => {
     });
   }
 
-
-
-
-
-
-
-
-
-
-
-
   const user = Accounts.findUserByUsername(SEED_USERNAME);
-
-  if (TasksCollection.find().count() === 0) {
-    [
-      'First Task',
-      'Second Task',
-      'Third Task',
-      'Fourth Task',
-      'Fifth Task',
-      'Sixth Task',
-      'Seventh Task',
-    ].forEach(taskText => insertTask(taskText, user));
-  }
 },
 
 ServiceConfiguration.configurations.upsert(
