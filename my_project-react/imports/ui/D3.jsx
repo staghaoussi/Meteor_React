@@ -22,22 +22,22 @@ export class D3 extends Component {
     const t = container.transition().duration(750);
 
     // code for enter, update and exit
-    container.selectAll('div')
+    container.selectAll('text')
       .data(this.state.data, d => d)
       .join(
-        enter => enter.append("div")
-          .style("color","green")
+        enter => enter.append("text")
+          .attr("fill","green")
           .attr('x',(d,i)=>i*16)
           .attr("y",-30)
           .text(d => d)
-          .call(enter => enter.transition(t).attr("y",0)),
+          .call(enter => enter.transition(t).attr("y",30)),
         update => update
-          .style("color","black")
-          .attr("y", 0)
+          .attr("fill","black")
+          .attr("y", 30)
           .call(update => update.transition(t).attr("x", (d, i) => i*16)),
         exit => exit
-        .style("color","red")
-        .call(exit => exit.transition(t).attr("y",30).remove())
+        .attr("fill","red")
+        .call(exit => exit.transition(t).attr("y",60).remove())
       )
     console.log("end of update")
   }
@@ -53,9 +53,9 @@ export class D3 extends Component {
     return (
       <React.Fragment>
         <button style={{padding: "0.5em", color: "black"}} onClick={() => {this.setState({data: this.randomText()}), console.log('button', this.state)}}>New Letters</button>
-        <div id='content' className="uk-flex uk-flex-center" ref={this.myRef}>
+        <svg id='content' className="uk-flex uk-flex-center" ref={this.myRef}>
 
-        </div>
+        </svg>
       </React.Fragment>);
   }
 }
